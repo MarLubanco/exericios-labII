@@ -8,7 +8,7 @@ public class ByteReader {
         OutputStream outputStream = null;
         double acabou = 0;
         try {
-            inputStream = new FileInputStream("testeEntrada.txt");
+            inputStream = new FileInputStream("C:\\Users\\labinfo\\IdeaProjects\\untitled\\textoGrande");
             outputStream = new FileOutputStream("testeSaida.txt");
             int c;
 
@@ -16,10 +16,10 @@ public class ByteReader {
                 outputStream.write(c);
             }
         } finally {
-            if (inputStream == null) {
+            if (inputStream != null) {
                 inputStream.close();
             }
-            if(outputStream == null) {
+            if(outputStream != null) {
                 outputStream.close();
             }
             acabou = System.currentTimeMillis();

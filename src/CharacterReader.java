@@ -10,7 +10,7 @@ public class CharacterReader {
         FileWriter out = null;
         double acabou = 0;
         try {
-            in = new FileReader("testeEntrada.txt");
+            in = new FileReader("C:\\Users\\labinfo\\IdeaProjects\\untitled\\textoGrande");
             out =  new FileWriter("testeSaida.txt");
             int c;
 
@@ -18,10 +18,10 @@ public class CharacterReader {
                 out.write(c);
             }
         } finally {
-            if (in == null) {
+            if (in != null) {
                 in.close();
             }
-            if(out == null) {
+            if(out != null) {
                 out.close();
             }
             acabou = System.currentTimeMillis();
