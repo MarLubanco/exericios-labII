@@ -1,3 +1,5 @@
+package analise;
+
 @SuppressWarnings("ALL")
 public enum TipoArquivo {
     P("PEQUENO"),
