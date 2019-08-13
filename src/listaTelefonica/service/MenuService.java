@@ -76,16 +76,12 @@ public class MenuService {
     }
 
     public static List<Contato> carregarBancoDeDados() throws IOException {
-        double inicio = System.currentTimeMillis();
         FileReader in = null;
         List<Contato> contatosBanco = new ArrayList<>();
         BufferedReader lerArq= null;
-        double acabou = 0;
         try {
             lerArq = new BufferedReader(new FileReader("banco-de-dados.txt"));
-
             String linha = lerArq.readLine();
-//            in = new FileReader("banco-de-dados.txt");
             while (linha != null) {
                 String[] usuario = linha.split(",");
                 contatosBanco.add(new Contato(usuario[0], Arrays.asList(Long.parseLong(usuario[1].trim()))));

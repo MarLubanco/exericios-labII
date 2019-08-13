@@ -4,6 +4,7 @@ import listaTelefonica.model.Contato;
 import listaTelefonica.service.MenuService;
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -31,7 +32,9 @@ public enum  Opcao implements OpcaoInterface {
         @Override
         public void realizarOpcao(List<Contato> contatosExistentes, Contato contato) {
             System.out.println("Contatos existentes: \n");
-            contatosExistentes.forEach(c -> System.out.println(c.toString()));
+            contatosExistentes.stream()
+                    .sorted(Comparator.comparing(Contato::getNome))
+                    .forEach(c -> System.out.println(c.toString()));
         }
     };
 
