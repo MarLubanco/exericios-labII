@@ -20,29 +20,17 @@ public class MenuService {
                 "-------------------------------\n" +
                 "1 - Inserir novo contato\n" +
                 "2 - Deletar contato \n" +
-                "3 - Mostar numero de contato");
+                "3 - Mostar numero de contato\n" +
+                "4 - Pesquisar contato");
     }
 
     public static void opcaoSelecionada(List<Contato> contatosExistentes) throws IOException {
         System.out.println("Escolha uma opção: ");
         Scanner scanner = new Scanner(System.in);
         String opcao = scanner.next();
-        switch (opcao) {
-            case "1" :
-                Contato contato = criarUsuario(scanner);
-                Opcao.INSERIR.realizarOpcao(contatosExistentes, contato);
-                break;
-            case "2":
-
-                Opcao.DELETAR.realizarOpcao(contatosExistentes, new Contato());
-                break;
-            case "3":
-                Opcao.LISTAR.realizarOpcao(contatosExistentes, new Contato());
-                break;
-            default:
-                System.out.println("Não possui esse comando");
-                break;
-        }
+        Contato contato = null;
+        contato = !opcao.equals("LISTAR") ? criarUsuario(scanner): null;
+        Opcao.valueOf(opcao).realizarOpcao(contatosExistentes, contato);
     }
 
     public static Contato criarUsuario(Scanner scanner) {
