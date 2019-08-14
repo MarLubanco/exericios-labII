@@ -29,7 +29,11 @@ public class MenuService {
         Scanner scanner = new Scanner(System.in);
         String opcao = scanner.next();
         Contato contato = null;
-        contato = !opcao.equals("LISTAR") ? criarUsuario(scanner): null;
+        if(!opcao.equals("LISTAR") && !opcao.equals("PESQUISAR")) {
+            contato = criarUsuario(scanner);
+        } else if(opcao.equals("PESQUISAR")) {
+            contato = pesquisarContato(scanner);
+        }
         Opcao.valueOf(opcao).realizarOpcao(contatosExistentes, contato);
     }
 
@@ -44,6 +48,22 @@ public class MenuService {
         return new Contato(nome, numerosConvertidos);
     }
 
+    public static Contato pesquisarContato(Scanner scanner) {
+        System.out.print("Pesquisar por nome ou numero? ");
+        String escolha = scanner.next();
+        String nome = null;
+        String numero =  null;
+        if(escolha.equalsIgnoreCase("nome")) {
+            System.out.print("Nome: ");
+            nome = scanner.next();
+
+        } else {
+            System.out.print("Numero: ");
+            numero = scanner.next();
+        }
+
+        return new Contato(nome, Arrays.asList(Long.valueOf(numero)));
+    }
     public static void persistirBanco(List<Contato> contatosExistentes) throws IOException {
         FileWriter out = null;
         try {

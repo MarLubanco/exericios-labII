@@ -52,8 +52,8 @@ public enum  Opcao implements OpcaoInterface {
             System.out.println("Pesquisa realizada");
             System.out.println("___________________________");
             contatosExistentes.stream()
-                    .filter(c -> (contato.getNome() != null && c.getNome().equals(contato.getNome()))
-                            || (contato.getNumero() != null && String.valueOf(c.getNumero()).equals(contato.getNumero().toString())))
+                    .filter(c -> (contato.getNome() != null && c.getNome().contains(contato.getNome()))
+                            || (contato.getNumero() != null && String.valueOf(c.getNumero().toString()).contains(contato.getNumero().toString())))
                     .sorted(Comparator.comparing(Contato::getNome))
                     .forEach(c -> System.out.println(c.toString()));
         }
