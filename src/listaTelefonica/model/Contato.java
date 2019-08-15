@@ -15,6 +15,14 @@ public class Contato {
         this.numero = numero;
     }
 
+    public Contato(String nome) {
+        this.nome = nome;
+    }
+
+    public Contato(List<Long> numero) {
+        this.numero = numero;
+    }
+
     public String getNome() {
         return nome;
     }

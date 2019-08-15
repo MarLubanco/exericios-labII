@@ -44,21 +44,7 @@ public enum  Opcao implements OpcaoInterface {
                     .sorted(Comparator.comparing(Contato::getNome))
                     .forEach(c -> System.out.println(c.toString()));
         }
-    },
-    PESQUISAR("4") {
-        @Override
-        public void realizarOpcao(List<Contato> contatosExistentes, Contato contato) {
-            System.out.println("___________________________");
-            System.out.println("Pesquisa realizada");
-            System.out.println("___________________________");
-            contatosExistentes.stream()
-                    .filter(c -> (contato.getNome() != null && c.getNome().contains(contato.getNome()))
-                            || (contato.getNumero() != null && String.valueOf(c.getNumero().toString()).contains(contato.getNumero().toString())))
-                    .sorted(Comparator.comparing(Contato::getNome))
-                    .forEach(c -> System.out.println(c.toString()));
-        }
     };
-
 
     private String opcao;
 

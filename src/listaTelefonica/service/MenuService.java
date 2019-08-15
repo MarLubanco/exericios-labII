@@ -7,10 +7,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class MenuService {
@@ -31,10 +28,13 @@ public class MenuService {
         Contato contato = null;
         if(!opcao.equals("LISTAR") && !opcao.equals("PESQUISAR")) {
             contato = criarUsuario(scanner);
+            Opcao.valueOf(opcao).realizarOpcao(contatosExistentes, contato);
         } else if(opcao.equals("PESQUISAR")) {
-            contato = pesquisarContato(scanner);
+            pesquisarContato(contatosExistentes, scanner);
+        } else {
+            Opcao.valueOf(opcao).realizarOpcao(contatosExistentes, contato);
+
         }
-        Opcao.valueOf(opcao).realizarOpcao(contatosExistentes, contato);
     }
 
     public static Contato criarUsuario(Scanner scanner) {
@@ -48,7 +48,7 @@ public class MenuService {
         return new Contato(nome, numerosConvertidos);
     }
 
-    public static Contato pesquisarContato(Scanner scanner) {
+    public static void pesquisarContato(List<Contato> contatos, Scanner scanner) {
         System.out.print("Pesquisar por nome ou numero? ");
         String escolha = scanner.next();
         String nome = null;
@@ -56,14 +56,14 @@ public class MenuService {
         if(escolha.equalsIgnoreCase("nome")) {
             System.out.print("Nome: ");
             nome = scanner.next();
-
+            search(contatos, new Contato(nome));
         } else {
             System.out.print("Numero: ");
             numero = scanner.next();
+            search(contatos, new Contato(Arrays.asList(Long.valueOf(numero))));
         }
-
-        return new Contato(nome, Arrays.asList(Long.valueOf(numero)));
     }
+
     public static void persistirBanco(List<Contato> contatosExistentes) throws IOException {
         FileWriter out = null;
         try {
@@ -103,4 +103,15 @@ public class MenuService {
         System.out.println("Dados recuperado do banco de dados");
         return contatosBanco;
     }
+
+    public static void search(List<Contato> contatosExistentes, Contato contato) {
+            System.out.println("___________________________");
+            System.out.println("Pesquisa realizada");
+            System.out.println("___________________________");
+            contatosExistentes.stream()
+                    .filter(c -> (contato.getNome() != null && c.getNome().contains(contato.getNome()))
+                            || (contato.getNumero() != null && String.valueOf(c.getNumero().toString()).contains(contato.getNumero().toString())))
+                    .sorted(Comparator.comparing(Contato::getNome))
+                    .forEach(c -> System.out.println(c.toString()));
+        }
 }
