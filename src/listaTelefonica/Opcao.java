@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public enum  Opcao implements OpcaoInterface {
     INSERIR("1") {
@@ -16,7 +15,7 @@ public enum  Opcao implements OpcaoInterface {
             if (!Objects.isNull(contato) && !contato.getNome().isEmpty()
                 && !contato.getNumero().isEmpty()) {
                 contatosExistentes.add(contato);
-                MenuService.persistirBanco(contatosExistentes);
+                MenuService.commitDataBase(contatosExistentes);
             }
         }
     },
@@ -28,10 +27,7 @@ public enum  Opcao implements OpcaoInterface {
                 contatosExistentes.stream()
                         .filter(c -> c.getNumero() == contato.getNumero())
                         .filter(c -> c.getNome().equals(contato.getNome()))
-                        .forEach(c -> {
-
-                            contatosExistentes.remove(c);
-                        });
+                        .forEach(c -> contatosExistentes.remove(c));
             }
         }
     },
@@ -39,6 +35,7 @@ public enum  Opcao implements OpcaoInterface {
     LISTAR("3") {
         @Override
         public void realizarOpcao(List<Contato> contatosExistentes, Contato contato) {
+            System.out.println("\n______________________________________________");
             System.out.println("Contatos existentes: \n");
             contatosExistentes.stream()
                     .sorted(Comparator.comparing(Contato::getNome))

@@ -41,7 +41,6 @@ public class Contato {
 
     @Override
     public String toString() {
-        return "nome='" + nome + '\'' +
-                ", numero=" + numero;
+        return "Contato - Nome: " + nome + ", Numero=" + numero;
     }
 }
