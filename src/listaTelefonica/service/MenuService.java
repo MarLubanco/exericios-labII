@@ -7,21 +7,21 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 public class MenuService {
 
     public static void listarMenu() {
-        System.out.println("Lista Telefonica \n" +
-                "-------------------------------\n" +
-                "1 - Inserir novo contato\n" +
-                "2 - Deletar contato \n" +
-                "3 - Mostar numero de contato\n" +
-                "4 - Pesquisar contato");
+        System.out.println(
+                "__________________________________________________ \n\n" +
+                "Lista Telefonica \n" +
+                "___________________________________________________\n\n" +
+                "INSERIR - Inserir novo contato\n" +
+                "DELETAR - Deletar contato \n" +
+                "LISTAR - Mostar numero de contato\n" +
+                "PESQUISAR - Pesquisar contato");
     }
 
     public static void opcaoSelecionada(List<Contato> contatosExistentes) throws IOException {
@@ -29,8 +29,18 @@ public class MenuService {
         Scanner scanner = new Scanner(System.in);
         String opcao = scanner.next();
         Contato contato = null;
-        contato = !opcao.equals("LISTAR") ? criarUsuario(scanner): null;
-        Opcao.valueOf(opcao).realizarOpcao(contatosExistentes, contato);
+        if(!opcao.equals("LISTAR") && !opcao.equalsIgnoreCase("DELETAR") && !opcao.equals("PESQUISAR")) {
+            contato = criarUsuario(scanner);
+            Opcao.valueOf(opcao).realizarOpcao(contatosExistentes, contato);
+        } else if(opcao.equals("PESQUISAR")) {
+            pesquisarContato(contatosExistentes, scanner);
+        } else if(opcao.equalsIgnoreCase("DELETAR")) {
+            System.out.println("Numero do contato pra deletar: ");
+            String numeroRemovido = scanner.next();
+            deletarUsuario(contatosExistentes, Long.valueOf(numeroRemovido));
+        } else {
+            Opcao.valueOf(opcao).realizarOpcao(contatosExistentes, contato);
+        }
     }
 
     public static Contato criarUsuario(Scanner scanner) {
@@ -44,7 +54,23 @@ public class MenuService {
         return new Contato(nome, numerosConvertidos);
     }
 
-    public static void persistirBanco(List<Contato> contatosExistentes) throws IOException {
+    public static void pesquisarContato(List<Contato> contatos, Scanner scanner) {
+        System.out.print("Pesquisar por nome ou numero? ");
+        String escolha = scanner.next();
+        String nome = null;
+        String numero =  null;
+        if(escolha.equalsIgnoreCase("nome")) {
+            System.out.print("Nome: ");
+            nome = scanner.next();
+            search(contatos, new Contato(nome));
+        } else {
+            System.out.print("Numero: ");
+            numero = scanner.next();
+            search(contatos, new Contato(Arrays.asList(Long.valueOf(numero))));
+        }
+    }
+
+    public static void commitDataBase(List<Contato> contatosExistentes) throws IOException {
         FileWriter out = null;
         try {
             out =  new FileWriter("banco-de-dados.txt");
@@ -82,5 +108,33 @@ public class MenuService {
         }
         System.out.println("Dados recuperado do banco de dados");
         return contatosBanco;
+    }
+
+    public static void search(List<Contato> contatosExistentes, Contato contato) {
+            System.out.println("_______________________________________________\n");
+            System.out.println("Pesquisa realizada");
+            System.out.println("_______________________________________________");
+            contatosExistentes.stream()
+                    .filter(c -> (contato.getNome() != null && c.getNome().contains(contato.getNome()))
+                            || (contato.getNumero() != null && String.valueOf(c.getNumero().toString()).contains(contato.getNumero().toString())))
+                    .sorted(Comparator.comparing(Contato::getNome))
+                    .forEach(c -> System.out.println(c.toString()));
+    }
+
+    public static void deletarUsuario(List<Contato> contatosExistentes, Long numero) throws IOException {
+        AtomicInteger index = new AtomicInteger();
+        AtomicInteger aux = new AtomicInteger();
+        contatosExistentes.stream()
+                .forEach(c -> {
+                    if(c.getNumero().contains(numero)) {
+                        aux.set(index.incrementAndGet());
+                        return;
+                    }
+                    index.incrementAndGet();
+
+                });
+        contatosExistentes.remove(aux.get() -1);
+        commitDataBase(contatosExistentes);
+
     }
 }

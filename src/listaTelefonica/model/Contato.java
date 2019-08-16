@@ -15,6 +15,14 @@ public class Contato {
         this.numero = numero;
     }
 
+    public Contato(String nome) {
+        this.nome = nome;
+    }
+
+    public Contato(List<Long> numero) {
+        this.numero = numero;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -33,7 +41,6 @@ public class Contato {
 
     @Override
     public String toString() {
-        return "nome='" + nome + '\'' +
-                ", numero=" + numero;
+        return "Contato - Nome: " + nome + ", Numero=" + numero;
     }
 }
