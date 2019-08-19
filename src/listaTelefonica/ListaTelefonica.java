@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ListaTelefonica {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         List<Contato> contatosExistente = new ArrayList<>();
         boolean controle = true;
         while (controle) {

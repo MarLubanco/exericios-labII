@@ -1,7 +1,9 @@
 package listaTelefonica.service;
 
 import listaTelefonica.Opcao;
+import listaTelefonica.exception.ComandoNaoEncontradoException;
 import listaTelefonica.model.Contato;
+import org.omg.CosNaming.NamingContextPackage.NotFound;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -24,15 +26,15 @@ public class MenuService {
                 "PESQUISAR - Pesquisar contato");
     }
 
-    public static void opcaoSelecionada(List<Contato> contatosExistentes) throws IOException {
+    public static void opcaoSelecionada(List<Contato> contatosExistentes) throws IOException, ClassNotFoundException {
         System.out.println("Escolha uma opção: ");
         Scanner scanner = new Scanner(System.in);
         String opcao = scanner.next();
         Contato contato = null;
-        if(!opcao.equals("LISTAR") && !opcao.equalsIgnoreCase("DELETAR") && !opcao.equals("PESQUISAR")) {
+        if(!opcao.equalsIgnoreCase("LISTAR") && !opcao.equalsIgnoreCase("DELETAR") && !opcao.equalsIgnoreCase("PESQUISAR")) {
             contato = criarUsuario(scanner);
             Opcao.valueOf(opcao).realizarOpcao(contatosExistentes, contato);
-        } else if(opcao.equals("PESQUISAR")) {
+        } else if(opcao.equalsIgnoreCase("PESQUISAR")) {
             pesquisarContato(contatosExistentes, scanner);
         } else if(opcao.equalsIgnoreCase("DELETAR")) {
             System.out.println("Numero do contato pra deletar: ");
@@ -47,14 +49,15 @@ public class MenuService {
         System.out.print("Nome do contato: ");
         String nome = scanner.next();
         System.out.println("Numeros do contato(separados por ;): ");
-        String[] numeros = scanner.next().split(";");;
+        String[] numeros = scanner.next().split(";");
         List<Long> numerosConvertidos = Arrays.asList(numeros).stream()
                 .map(Long::valueOf)
                 .collect(Collectors.toList());
+
         return new Contato(nome, numerosConvertidos);
     }
 
-    public static void pesquisarContato(List<Contato> contatos, Scanner scanner) {
+    public static void pesquisarContato(List<Contato> contatos, Scanner scanner) throws ClassNotFoundException {
         System.out.print("Pesquisar por nome ou numero? ");
         String escolha = scanner.next();
         String nome = null;
@@ -63,10 +66,12 @@ public class MenuService {
             System.out.print("Nome: ");
             nome = scanner.next();
             search(contatos, new Contato(nome));
-        } else {
+        } else  if(escolha.equalsIgnoreCase("numero")){
             System.out.print("Numero: ");
             numero = scanner.next();
             search(contatos, new Contato(Arrays.asList(Long.valueOf(numero))));
+        } else {
+            System.out.println("Esse comando não existe, tente novamente.");
         }
     }
 
