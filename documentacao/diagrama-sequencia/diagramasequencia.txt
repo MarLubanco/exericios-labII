@@ -1,0 +1,15 @@
+@startuml
+actor Usuario
+boundary FormTerminal
+entity Contato
+
+FormTerminal -> FormTerminal : listarMenu()
+Usuario -> FormTerminal : btnPesquisar()
+FormTerminal -> Contato : pesquisarContato()
+Usuario -> FormTerminal : btnInserir
+FormTerminal -> Contato : realizarOpcao()
+Usuario -> FormTerminal : btnDeletar
+FormTerminal -> Contato : realizarOpcao
+Usuario -> FormTerminal : btnListar
+FormTerminal -> Contato : realizarOpcao()
+@enduml

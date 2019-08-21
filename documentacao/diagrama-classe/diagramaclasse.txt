@@ -1,0 +1,9 @@
+@startuml
+class Contato {
+  String nome
+  Long numero
+  Contato criarUsuario()
+  Contato pesquisarContato()
+  void realizarOpcao()
+}
+@enduml
