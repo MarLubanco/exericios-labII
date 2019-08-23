@@ -41,14 +41,23 @@ cd exericios-labIII
 
 ![readme-intro](documentacao/diagrama-classe/diagrama-classe-final.png)
 
-[![npm](https://img.shields.io/npm/v/react-sketchapp.svg)](https://www.npmjs.com/package/react-sketchapp) ![Sketch.app](https://img.shields.io/badge/Sketch.app-43--50-brightgreen.svg) [![Travis](https://img.shields.io/travis/rust-lang/rust.svg)](https://travis-ci.org/airbnb/react-sketchapp) [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/react-sketchapp/Lobby)
+## Imagens do projeto
 
-## Documentation
+<div align="center">
+      <img alt="react-sketchapp" src="screenshot/foto.jpg" style="max-height:120; width:60; height: auto; max-width:100%" />
+</div>
 
-- [Examples](http://airbnb.io/react-sketchapp/docs/examples.html)
-- [API Reference](http://airbnb.io/react-sketchapp/docs/API.html)
-- [Styling](http://airbnb.io/react-sketchapp/docs/styling.html)
-- [Universal Rendering](http://airbnb.io/react-sketchapp/docs/guides/universal-rendering.html)
-- [Data Fetching](http://airbnb.io/react-sketchapp/docs/guides/data-fetching.html)
-- [FAQ](http://airbnb.io/react-sketchapp/docs/FAQ.html)
-- [Contributing](http://airbnb.io/react-sketchapp/CONTRIBUTING.html)
+<div align="center">
+  <strong>Listagem dos contatos</strong>
+</div>
+<br>
+<hr>
+
+<div align="center">
+      <img alt="react-sketchapp" src="screenshot/foto2.jpg" style="max-height:140px; width:80; height: auto; max-width:100%" />
+</div>
+
+<div align="center">
+  <strong>Pesquisa por nome</strong>
+</div>
+
