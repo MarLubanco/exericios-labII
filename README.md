@@ -11,11 +11,14 @@
 ## Start Project🏃‍
 
 Ao iniciar o projeto, será listado um menu com 4 opções:
-- **INSERIR —** Essa função é para adicionar um novo contato, os parâmetros são nome e números (separados por ";") .
--  **DELETAR —** Essa função é para remover um usuário do banco de dados através de seu número de telefone.
-- **PESQUISAR —** Essa função é para pesquisar por nome ou número do contato, é necessário inserir no minimo uma letra para realizar a pesquisa. 
-- **LISTAR —** Essa função é para listar todos os contatos existentes na lista telefônica do usuário. 
-First, make sure you have installed [Sketch](http://sketchapp.com) version 50+, & a recent [npm](https://nodejs.org/en/download/).
+
+| |COMANDOS|  |  | |
+|---|---|---|---|---|
+INSERIR|Essa função é para adicionar um novo contato, os parâmetros são nome e números (separados por ";") . | | | | |
+DELETAR|  Essa função é para remover um usuário do banco de dados através de seu número de telefone.||| | |
+PESQUISAR | Essa função é para pesquisar por nome ou número do contato, é necessário inserir no minimo uma letra para realizar a pesquisa.  | | | | |
+LISTAR |Essa função é para listar todos os contatos existentes na lista telefônica do usuário.  ||| | |
+
 
 Colaborar para a atividade:
 
