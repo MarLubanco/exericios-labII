@@ -23,13 +23,12 @@ Colaborar para a atividade:
 git https://github.com/MarLubanco/exericios-labIII.git
 cd exericios-labIII
 
-npm run render
 ```
 
 ## Documentação
 - **Caso de Uso —** 
 
-![readme-intro](documentacao/caso-uso/diagrama-classe-final.png)
+![readme-intro](documentacao/caso-uso/caso-de-uso-final.png)
 
 - **Diagrama de Sequência —** 
 
