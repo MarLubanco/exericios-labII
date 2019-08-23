@@ -22,7 +22,7 @@ public class MenuService {
                 "___________________________________________________\n\n" +
                 "INSERIR - Inserir novo contato\n" +
                 "DELETAR - Deletar contato \n" +
-                "LISTAR - Mostar numero de contato\n" +
+                "LISTAR - Mostrar numero de contato\n" +
                 "PESQUISAR - Pesquisar contato");
     }
 
