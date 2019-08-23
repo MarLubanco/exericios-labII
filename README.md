@@ -1,4 +1,5 @@
 
+
 <div align="center">
       <img alt="react-sketchapp" src="contacts_ui_design-.png" style="max-height:163px; width:100; height: auto; max-width:100%" />
 </div>
@@ -28,11 +29,11 @@ npm run render
 ## Documentação
 - **Caso de Uso —** 
 
-![readme-intro](documentacao/caso de uso/caso-de-uso-final.png)
+![readme-intro](documentacao/caso de uso/diagrama-classe-final.png)
 
 - **Diagrama de Sequência —** 
 
-![readme-intro](C:\Users\labinfo\IdeaProjects\untitled\documentacao\diagrama-sequencia\diagrama-sequencia-final.png)
+![readme-intro](documentacao/diagrama-sequencia/diagrama-sequencia-final.png)
 
 - **Diagrama de Classe —** 
 
